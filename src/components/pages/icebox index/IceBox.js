@@ -9,6 +9,7 @@ function Icebox () {
 
                 <Link to="/editmeal"><button>Edit</button></Link>
                 <Link to="/newmeal"><button>Enter a new meal here!</button></Link>
+                <Link to="/deletemeal"><button>Delete</button></Link>
             </div>
         </>
     )
