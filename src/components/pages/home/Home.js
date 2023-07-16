@@ -13,6 +13,8 @@ function Home() {
                     <input placeholder="Password" />
                     <br />
                     <button>Log in</button>
+                    <br />
+                    <Link to='/icebox'>Temp Icebox Link</Link>
                 </form>
             </div>
             <div>
