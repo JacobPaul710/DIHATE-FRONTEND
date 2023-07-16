@@ -19,7 +19,7 @@ function Home() {
                 <h2>Don't have an account? Create one here:</h2>
             </div>
             <div>
-                <Link to="/newaccount"><button>Create New Account</button></Link>
+                <Link to="/registration"><button>Create New Account</button></Link>
             </div>
         </>
     )
