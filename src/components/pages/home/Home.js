@@ -3,50 +3,63 @@ import { useState } from "react";
 
 function Home() {
 
-    const Navigate = useNavigate();
+        const Navigate = useNavigate();
 
-    let [User, setUser] = useState({
-        email: " ",
-        password: " "
-    })
+        let [User, setUser] = useState({
+            email: " ",
+            password: " "
+        })
 
-    function handleChange(e) {
-        setUser((previousFormState) => ({
-            ...previousFormState,
-            [e.target.name]: e.target.value
-        }))
-    }
+        let [Errors, setErrors] = useState({
+            email: " ",
+            password: " "
+        })
 
-    async function handleSubmit(e) {
-        try{
-            let email = User.email;
-            let password = User.password;
-            e.preventDefault();
-           const res = await fetch('http://localhost:4000/login', {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({ email, password }),
-                credentials: "include"
-            })
-            const jsonRes = await res.json();
-            // console.log('logged in', jsonRes);
-            if (jsonRes.errors) {
-                console.log(jsonRes.errors)
+        function handleChange(e) {
+            setUser((previousFormState) => ({
+                ...previousFormState,
+                [e.target.name]: e.target.value
+            }));
+
+            setErrors((previousFormState) => ({
+                ...previousFormState, 
+                [e.target.name]: "",
+                }));
+        }
+
+        async function handleSubmit(e) {
+            try{
+                let email = User.email;
+                let password = User.password;
+                e.preventDefault();
+            const res = await fetch('http://localhost:4000/login', {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({ email, password }),
+                    credentials: "include"
+                })
+                const jsonRes = await res.json();
+                // console.log('logged in', jsonRes);
+                if (jsonRes.errors) {
+                    setErrors((previousFormState) => ({
+                        ...previousFormState,
+                        ...jsonRes.errors
+                    }))
+                    console.log(jsonRes.errors)
+                }
+                if (jsonRes.user)
+                    Navigate('/icebox');
             }
-            if (jsonRes.user)
-                Navigate('/icebox');
+            catch(error) {
+                console.log(error)
+            }
+            finally {
+                e.target.reset();
+            }
         }
-        catch(error) {
-            console.log(error)
-        }
-        finally {
-            e.target.reset();
-            // Navigate('/icebox');
-        }
-    }
-//we need a conditional for if user is returned, to redirect to icebox. otherwise back to login page 
+        
 
     return(
         <>
@@ -57,12 +70,12 @@ function Home() {
                 <form onSubmit={handleSubmit}>
                     <label>Email: </label>
                     <input type="email" placeholder="Enter Email" name="email" required onChange={handleChange} />
-                    <div className="email error"></div>
+                    <div className="email error"><p>{Errors.email}</p></div>
                     <br />
                     
                     <label>Password: </label>
                     <input type="password" placeholder="Enter Password" name="password" required onChange={handleChange} />
-                    <div className="passsword error"></div>
+                    <div className="passsword error">{Errors.password}</div>
                     <br />
 
                     <button>Log In</button>
