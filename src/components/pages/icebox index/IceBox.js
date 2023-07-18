@@ -6,14 +6,16 @@ import Pagination from "../../Pagination";
 import './icebox.css'
 
 
-function Icebox () {
+function Icebox ( ) {
 
     // const [meals, setMeals] = useState([]);
+    
 
     const [posts, setPosts] = useState([]);
-    const[currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage] = useState(8);
     const [servings, setServings] = useState(0);
+    const [username, setUsername] = useState('');
 
 
     const fetchMeals = async () => {
@@ -34,6 +36,7 @@ function Icebox () {
             // console.log(mealData);
             mealData = await mealData.json();
             setPosts(mealData);
+            console.log()
         }
         catch (err) {
             let error = err.message;
@@ -44,23 +47,24 @@ function Icebox () {
     // I want create a button that will add to each meal serving from its current number. 
     // I need to have useState set the current number of servings to whatever it is in the database. And then when the button is clicked, I need useEffect to update that number by 1. 
     //Unsure how to grab the number of servings after the data is mapped through. 
-
     function addServing () {
-        let currentServings = servings;
-        currentServings++;
-        setServings(currentServings);
-        console.log('serving added')
+
     }
 
-    function subtractServing () {
-        let currentServings = servings;
-        currentServings--;
-        setServings(currentServings);
-        console.log('serving subtracted')
+    function subServing () {
+        
+    }
+
+    function displayUser () {
+        const responseString = localStorage.getItem('response');
+        const response = JSON.parse(responseString);
+        const username = response.username;
+        return setUsername(username);
     }
 
     useEffect(() => {
         fetchMeals();
+        displayUser()
     }, []);
 
     const indexOfLastPost = currentPage * postPerPage;
@@ -71,20 +75,22 @@ function Icebox () {
 
     return(
         <div className="container">
-            <div><h1>Welcome to your Icebox, User!</h1>
+            <div><h1>Welcome to your Icebox, {username}!</h1>
             <button >Log Out</button></div>
 
             {currentPost.map((post) => {
                 return (
                     <>
                         
-                            <div className="col-6" key={post.id}>
-                                <h3>{post.id}</h3>
-                                <h3>{post.mealName}</h3>
-                                <h3>{post.servings}</h3>
-                                <h3>{post.date}</h3>
+                            <div className="" key={post.id}>
+                                {/* <h3>Meal number: {post.id}</h3> */}
+                                <h3>Meal: {post.mealName}</h3>
+                                <br />
+                                <h3>Servings left: {post.servings}</h3>
+                                <br />
+                                <h3>Date cooked: {post.date}</h3>
                                 <button onClick={addServing}>+</button>
-                                <button onClick={subtractServing}>-</button>
+                                <button onClick={subServing}>-</button>
                                 <div>
                                     <Link to="/editmeal"><button>Edit</button></Link>
                                     <Link to="/deletemeal"><button>Delete</button></Link>

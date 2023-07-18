@@ -44,6 +44,8 @@ function Home() {
                 console.log(document.cookie, 'cookie here');
                 const jsonRes = await res.json();
                 console.log('logged in', jsonRes);
+                const responseString = JSON.stringify(jsonRes);
+                localStorage.setItem('response', responseString)
                 if (jsonRes.errors) {
                     setErrors((previousFormState) => ({
                         ...previousFormState,
@@ -51,7 +53,7 @@ function Home() {
                     }))
                     console.log(jsonRes.errors)
                 }
-                if (jsonRes.user)
+                if (jsonRes.email)
                     Navigate('/icebox');
             }
             catch(error) {
@@ -62,11 +64,6 @@ function Home() {
             }
         }
         
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-          }
 
     return(
         <>
