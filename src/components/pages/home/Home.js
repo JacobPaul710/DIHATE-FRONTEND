@@ -40,8 +40,10 @@ function Home() {
                     body: JSON.stringify({ email, password }),
                     credentials: "include"
                 })
+                console.log(res.headers, 'headers here');
+                console.log(document.cookie, 'cookie here');
                 const jsonRes = await res.json();
-                // console.log('logged in', jsonRes);
+                console.log('logged in', jsonRes);
                 if (jsonRes.errors) {
                     setErrors((previousFormState) => ({
                         ...previousFormState,
@@ -60,25 +62,30 @@ function Home() {
             }
         }
         
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+          }
 
     return(
         <>
             <div>
                 <h1>Do I have anything to eat?</h1>
+                <h3>Use this simple site to help you keep track of your frozen meals.</h3>
             </div>
             <div>
                 <form onSubmit={handleSubmit}>
                     <label>Email: </label>
                     <input type="email" placeholder="Enter Email" name="email" required onChange={handleChange} />
                     <div className="email error"><p>{Errors.email}</p></div>
-                    <br />
-                    
                     <label>Password: </label>
                     <input type="password" placeholder="Enter Password" name="password" required onChange={handleChange} />
                     <div className="passsword error">{Errors.password}</div>
                     <br />
 
                     <button>Log In</button>
+                    <button>Log Out</button>
                 </form>
                 
             </div>

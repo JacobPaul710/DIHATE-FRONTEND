@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import Pagination from "../../Pagination";
 
+import './icebox.css'
+
 
 function Icebox () {
 
@@ -10,25 +12,26 @@ function Icebox () {
 
     const [posts, setPosts] = useState([]);
     const[currentPage, setCurrentPage] = useState(1);
-    const [postPerPage] = useState(10);
+    const [postPerPage] = useState(8);
+    const [servings, setServings] = useState(0);
 
 
     const fetchMeals = async () => {
         // console.log(document.cookie);
-        // const token = Cookies.get('jwt');
+        const token = Cookies.get('jwt');
         // console.log(token);
         try {
-        //     let mealData = await fetch('http://localhost:4000/icebox', {
-        //         method: 'GET',
-        //         headers: {
-        //             Authorization: `Bearer ${token}`,
-        //             'Content-Type': 'application/json',
-        //         },
-        //         credentials: 'include'
-        //     }
-        //     );
-            let mealData = await fetch('https://jsonplaceholder.typicode.com/posts');
-            console.log(mealData);
+            let mealData = await fetch('http://localhost:4000/icebox', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            }
+            );
+            // let mealData = await fetch('https://jsonplaceholder.typicode.com/posts');
+            // console.log(mealData);
             mealData = await mealData.json();
             setPosts(mealData);
         }
@@ -38,6 +41,23 @@ function Icebox () {
         }
     }
 
+    // I want create a button that will add to each meal serving from its current number. 
+    // I need to have useState set the current number of servings to whatever it is in the database. And then when the button is clicked, I need useEffect to update that number by 1. 
+    //Unsure how to grab the number of servings after the data is mapped through. 
+
+    function addServing () {
+        let currentServings = servings;
+        currentServings++;
+        setServings(currentServings);
+        console.log('serving added')
+    }
+
+    function subtractServing () {
+        let currentServings = servings;
+        currentServings--;
+        setServings(currentServings);
+        console.log('serving subtracted')
+    }
 
     useEffect(() => {
         fetchMeals();
@@ -50,24 +70,29 @@ function Icebox () {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return(
-        <>
-            <div><h1>Welcome to your Icebox, User!</h1></div>
+        <div className="container">
+            <div><h1>Welcome to your Icebox, User!</h1>
+            <button >Log Out</button></div>
 
             {currentPost.map((post) => {
                 return (
                     <>
-                        <div key={post.id}>
-                        {/* <div key={meal._id}> */}
-                            {/* <h3>{meal.name}</h3> */}
-                            <h3>{post.id}</h3>
-                            {/* <h3>{meal.servings}</h3> */}
-                            <h3>{post.title}</h3>
-                            <h3>{post.body}</h3>
-                            {/* <h3>{meal.date}</h3> */}
-                            <Link to="/editmeal"><button>Edit</button></Link>
-                            <Link to="/deletemeal"><button>Delete</button></Link>
-                        </div>
-                    </>
+                        
+                            <div className="col-6" key={post.id}>
+                                <h3>{post.id}</h3>
+                                <h3>{post.mealName}</h3>
+                                <h3>{post.servings}</h3>
+                                <h3>{post.date}</h3>
+                                <button onClick={addServing}>+</button>
+                                <button onClick={subtractServing}>-</button>
+                                <div>
+                                    <Link to="/editmeal"><button>Edit</button></Link>
+                                    <Link to="/deletemeal"><button>Delete</button></Link>
+                                </div>
+                            </div>
+                            
+                        </>
+                        
                 )
             })}
             <div className='container mt-5'>
@@ -76,7 +101,7 @@ function Icebox () {
             <div>
                 <Link to="/newmeal"><button>Enter a new meal here!</button></Link>
             </div>
-        </>
+        </div>
     )
 }
 
