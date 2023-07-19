@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import './newmeal.css'
 
-function NewMeal () {
+function NewMeal() {
     const Navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [newMeal, setNewMeal] = useState(
@@ -15,26 +15,25 @@ function NewMeal () {
         }
     )
 
-    function displayUser () {
+    function displayUser() {
         const responseString = localStorage.getItem('response');
         const response = JSON.parse(responseString);
         const username = response.username;
         return setUsername(username);
     }
 
-    function onChange (e) {
+    function onChange(e) {
         setNewMeal((previousFormState) => ({
             ...previousFormState,
             [e.target.name]: e.target.value
-            
+
         }))
     }
 
-    
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            const res = await fetch('http://localhost:4000/new', {
+            await fetch('http://localhost:4000/new', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
@@ -43,20 +42,18 @@ function NewMeal () {
                 credentials: "include"
             })
         } catch (error) {
-                console.log(error);
+            console.log(error);
         }
         finally {
             e.target.reset();
             Navigate('/icebox');
-            }
         }
-
-
+    }
 
     useEffect(() => {
         displayUser()
     }, []);
-    return(
+    return (
         <div className="container">
             <div className="row">
                 <div className="col-12 new-intro">
@@ -65,14 +62,14 @@ function NewMeal () {
             </div>
             <form className="form" onSubmit={handleSubmit}>
                 <label className="form-label mt-4">Meal name: </label>
-                <input className="input form-control col-6"  type="text" placeholder="Enter desired meal name" name="mealName" required
-                onChange={onChange}/>
+                <input className="input form-control col-6" type="text" placeholder="Enter desired meal name" name="mealName" required
+                    onChange={onChange} />
                 <br />
                 <label className="form-label mt-4">Servings:</label>
-                <input className="input form-control col-6"  type="number" placeholder="How many servings are you freezing?" name="servings"required onChange={onChange} />
+                <input className="input form-control col-6" type="number" placeholder="How many servings are you freezing?" name="servings" required onChange={onChange} />
                 <br />
                 <label className="form-label mt-4">Date cooked:</label>
-                <input className="input form-control col-6 date"  type="date" placeholder="What date was this meal cooked?" name="date" required onChange={onChange} />
+                <input className="input form-control col-6 date" type="date" placeholder="What date was this meal cooked?" name="date" required onChange={onChange} />
                 <br />
                 <button className="btn btn-success" >Enter into Icebox!</button>
             </form>
@@ -82,7 +79,5 @@ function NewMeal () {
         </div>
     )
 }
-
-
 
 export default NewMeal;

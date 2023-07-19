@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import './editmeal.css';
 
-function EditMeal () {
+function EditMeal() {
     const Navigate = useNavigate();
     const { mealName, id } = useParams();
     const [username, setUsername] = useState('');
@@ -17,26 +17,26 @@ function EditMeal () {
         }
     )
 
-    function displayUser () {
+    function displayUser() {
         const responseString = localStorage.getItem('response');
         const response = JSON.parse(responseString);
         const username = response.username;
         return setUsername(username);
     }
 
-    function onChange (e) {
+    function onChange(e) {
         setNewMeal((previousFormState) => ({
             ...previousFormState,
             [e.target.name]: e.target.value
-            
+
         }))
     }
 
-    
+
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            const res = await fetch(`http://localhost:4000/edit/${id}`, {
+            await fetch(`http://localhost:4000/edit/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"
@@ -45,20 +45,20 @@ function EditMeal () {
                 credentials: "include"
             })
         } catch (error) {
-                console.log(error);
+            console.log(error);
         }
         finally {
             e.target.reset();
             Navigate('/icebox');
-            }
         }
+    }
 
 
 
     useEffect(() => {
         displayUser()
     }, []);
-    return(
+    return (
         <div className="container">
             <div className="row">
                 <div className="col-12 edit-intro"><h1>You are editing <span className="text-warning">{mealName}</span> in <span className="text-primary">{username}'s</span> Icebox!</h1>
@@ -67,13 +67,13 @@ function EditMeal () {
             <form className="form" onSubmit={handleSubmit}>
                 <label className="form-label mt-4">{mealName}: </label>
                 <input className="input form-control col-6" type="text" placeholder="Enter new desired meal name" name="mealName" required
-                onChange={onChange}/>
+                    onChange={onChange} />
                 <br />
                 <label className="form-label mt-4">Servings:</label>
-                <input className="input form-control col-6"  type="number" placeholder="How many servings are you freezing?" name="servings"required onChange={onChange} />
+                <input className="input form-control col-6" type="number" placeholder="How many servings are you freezing?" name="servings" required onChange={onChange} />
                 <br />
                 <label className="form-label mt-4">Date cooked:</label>
-                <input className="input form-control col-6 date"  type="date" name="date" required onChange={onChange} />
+                <input className="input form-control col-6 date" type="date" name="date" required onChange={onChange} />
                 <br />
                 <button className="btn btn-success" >Update Icebox!</button>
             </form>
