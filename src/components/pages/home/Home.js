@@ -40,10 +40,10 @@ function Home() {
                     body: JSON.stringify({ email, password }),
                     credentials: "include"
                 })
-                console.log(res.headers, 'headers here');
-                console.log(document.cookie, 'cookie here');
+                // console.log(res.headers, 'headers here');
+                // console.log(document.cookie, 'cookie here');
                 const jsonRes = await res.json();
-                console.log('logged in', jsonRes);
+                // console.log('logged in', jsonRes);
                 const responseString = JSON.stringify(jsonRes);
                 localStorage.setItem('response', responseString)
                 if (jsonRes.errors) {

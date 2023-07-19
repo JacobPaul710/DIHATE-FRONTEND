@@ -31,6 +31,9 @@ function Registration () {
                 body: JSON.stringify(newUser),
                 credentials: "include"
             })
+            const jsonRes = await res.json();
+            const responseString = JSON.stringify(jsonRes);
+            localStorage.setItem('response', responseString)
             // console.log(res);
         }
         catch(error) {
