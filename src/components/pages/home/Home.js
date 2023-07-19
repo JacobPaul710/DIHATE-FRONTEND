@@ -68,7 +68,7 @@ function Home() {
     return(
         <>
             <div>
-                <h1>Do I have anything to eat?</h1>
+                <Link to="/icebox"><h1>Do I have anything to eat?</h1></Link>
                 <h3>Use this simple site to help you keep track of your frozen meals.</h3>
             </div>
             <div>
@@ -82,7 +82,6 @@ function Home() {
                     <br />
 
                     <button>Log In</button>
-                    <button>Log Out</button>
                 </form>
                 
             </div>

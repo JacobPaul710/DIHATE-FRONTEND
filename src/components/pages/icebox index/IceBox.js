@@ -79,7 +79,7 @@ function Icebox ( ) {
     return(
         <div className="container">
             <div><h1>Welcome to your Icebox, {username}!</h1>
-            <button >Log Out</button></div>
+           <Link to="/logout" ><button >Log Out</button></Link></div>
 
             {currentPost.map((post) => {
                 let formatted = moment(post.date).format("MM/DD/YYYY")

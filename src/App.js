@@ -8,6 +8,7 @@ import Icebox from './components/pages/icebox index/IceBox';
 import NewMeal from './components/pages/new meal/NewMeal';
 import EditMeal from './components/pages/meal edit/EditMeal';
 import DeleteMeal from './components/pages/delete meal/DeleteMeal';
+import Logout from './components/Logout';
 
 function App () {
   return (
@@ -18,6 +19,7 @@ function App () {
       <Route path='/newmeal' element={<NewMeal />} />
       <Route path='/editmeal' element={<EditMeal />} />
       <Route path='/deletemeal' element={<DeleteMeal />} />
+      <Route path='/logout' element={<Logout />} />
     </Routes>
   )
 }
