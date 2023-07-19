@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import Pagination from "../../Pagination";
+import moment from 'moment';
+
 
 import './icebox.css'
 
@@ -33,10 +35,10 @@ function Icebox ( ) {
             }
             );
             // let mealData = await fetch('https://jsonplaceholder.typicode.com/posts');
-            // console.log(mealData);
             mealData = await mealData.json();
+            console.log(mealData, "mealdata");
             setPosts(mealData);
-            console.log()
+            console.log(posts,"posts");
         }
         catch (err) {
             let error = err.message;
@@ -72,6 +74,7 @@ function Icebox ( ) {
     const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+   
 
     return(
         <div className="container">
@@ -79,16 +82,14 @@ function Icebox ( ) {
             <button >Log Out</button></div>
 
             {currentPost.map((post) => {
+                let formatted = moment(post.date).format("MM/DD/YYYY")
                 return (
-                    <>
-                        
-                            <div className="" key={post.id}>
-                                {/* <h3>Meal number: {post.id}</h3> */}
+                            <div key={post._id}>
                                 <h3>Meal: {post.mealName}</h3>
                                 <br />
                                 <h3>Servings left: {post.servings}</h3>
                                 <br />
-                                <h3>Date cooked: {post.date}</h3>
+                                <h3>Date cooked: {formatted}</h3>
                                 <button onClick={addServing}>+</button>
                                 <button onClick={subServing}>-</button>
                                 <div>
@@ -97,7 +98,6 @@ function Icebox ( ) {
                                 </div>
                             </div>
                             
-                        </>
                         
                 )
             })}
