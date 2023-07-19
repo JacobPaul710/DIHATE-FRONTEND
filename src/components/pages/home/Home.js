@@ -77,7 +77,7 @@ function Home() {
                 
             <div>
                 {/* <fieldset> */}
-                <form className="test" onSubmit={handleSubmit}>
+                <form className="form" onSubmit={handleSubmit}>
                     <label className="form-label mt-4"><h5>Email: </h5></label>
                     <input className="input form-control col-6" type="email" placeholder="Enter Email" name="email" required onChange={handleChange} />
                     <div className="email error text-danger"><p>{Errors.email}</p></div>

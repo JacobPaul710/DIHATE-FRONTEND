@@ -49,32 +49,34 @@ function Registration () {
 
 
     return(
-        <>
-            <div>
+        <div className="container">
+            <div className="row">
+            <div className="col-12 new-intro">
                 <h1>You are creating a new account!</h1>
-
+            </div>
                 <div>
-                    <form onSubmit={handleSubmit}>
-                        <label>Email: </label>
-                        <input type="email" placeholder="Enter Email" name="email" required onChange={handleChange}/>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <label className="form-label mt-4">Email: </label>
+                        <input className="input form-control col-6"  type="email" placeholder="Enter Email" name="email" required onChange={handleChange}/>
                         <div className="email error"></div>
                         <br />
-                        <label>Username: </label>
-                        <input type="text" placeholder="Enter Username" name="username" required onChange={handleChange}/>
+                        <label className="form-label mt-4">Username: </label>
+                        <input className="input form-control col-6"  type="text" placeholder="Enter Username" name="username" required onChange={handleChange}/>
                         <div className="username error"></div>
                         <br />
-                        <label>Password: </label>
-                        <input type="password" placeholder="Enter Password" name="password" required onChange={handleChange}/>
+                        <label className="form-label mt-4">Password: </label>
+                        <input className="input form-control col-6"  type="password" placeholder="Enter Password" name="password" required onChange={handleChange}/>
                         <div className="passsword error"></div>
                         <br />
                        
-                        <button>Confirm Signup</button>
+                        <button className="btn btn-success ">Confirm Signup</button>
                     </form>
                 </div>
-
-                <Link to='/'><button>Nevermind, I have one.</button></Link>
+                <div className="col-12 ui">
+                    <Link to='/'><button className="btn btn-primary btn-sm">Nevermind, I have one.</button></Link>
+                </div>
             </div>
-        </>
+        </div>
     )
 }
 

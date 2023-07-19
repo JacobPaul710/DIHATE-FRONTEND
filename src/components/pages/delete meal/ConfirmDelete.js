@@ -31,17 +31,21 @@ function ConfirmDelete () {
     }, []);
 
     return(
-        <>
-            <div>
-                <h1>You are deleting {mealName} from {username}'s Icebox!</h1>
-            </div>
-            <div>
+        <div className="container">
+                <div className="row">
+                    <div className="col-12 edit-intro"> 
+                    <h1>You are <span className="text-danger">deleting</span> <span className="text-warning">{mealName}</span> from<span className="text-primary">{username}'s</span> Icebox!</h1>
+                    </div>
+                </div>
+            <div className="col-12 confirm">
                 <h2>Are you sure to want to remove this meal from your Icebox?</h2>
                 <h3>You can re-add this meal at any time.</h3>
             </div>
-            <button onClick={handleDelete}>Delete</button>
-            <Link to="/icebox"><button>Back to Icebox!</button></Link>
-        </>
+            <div className="col-12 ui">
+                <button class="btn btn-danger" onClick={handleDelete}>Delete</button>
+                <Link to="/icebox"><button className="btn btn-primary btn-sm">Back to Icebox!</button></Link>
+            </div>
+        </div>
     )
 }
 

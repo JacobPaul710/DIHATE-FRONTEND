@@ -111,10 +111,10 @@ function Icebox ( ) {
                       <button onClick={subServing}>-</button> */}
                       <div>
                         <Link to={`/edit/${post.mealName}/${post._id}`}>
-                          <button className="btn btn-info">Edit</button>
+                          <button className="btn btn-info btn-sm">Edit</button>
                         </Link>
                         <Link to={`/confirm/${post.mealName}/${post._id}`}>
-                          <button className="btn btn-danger">Delete</button>
+                          <button className="btn btn-danger btn-sm">Delete</button>
                         </Link>
                       </div>
                     </div>
