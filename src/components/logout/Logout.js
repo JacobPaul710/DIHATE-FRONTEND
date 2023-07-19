@@ -13,9 +13,7 @@ function Logout() {
         catch (err) {
             console.log(err);
         } 
-        // finally {
-        //     navigate('/');
-        // }
+     
     } 
     useEffect(() => {
         handleLogout();
@@ -25,5 +23,3 @@ function Logout() {
 } 
 
 export default Logout;
-
-//cookie is being reset by logout function correctly, but browser is possibly caching it. Local storage is removed so user is still logged out, but cookie remains. 

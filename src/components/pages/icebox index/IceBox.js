@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
-import Pagination from "../../pagination/Pagination"
+import Pagination from "../pagination/Pagination"
 import moment from 'moment';
 
 
