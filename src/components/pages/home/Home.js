@@ -81,7 +81,7 @@ function Home() {
                     <div className="passsword error">{Errors.password}</div>
                     <br />
 
-                    <button>Log In</button>
+                    <button class="btn btn-success">Log In</button>
                 </form>
                 
             </div>
@@ -89,7 +89,7 @@ function Home() {
                 <h2>Don't have an account? Create one here:</h2>
             </div>
             <div>
-                <Link to="/registration"><button>Create New Account</button></Link>
+                <Link to="/registration"><button class="btn btn-primary">Create New Account</button></Link>
             </div>
         </>
     )

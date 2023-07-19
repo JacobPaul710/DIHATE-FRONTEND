@@ -40,18 +40,10 @@ function NewMeal () {
                 body: JSON.stringify(newMeal),
                 credentials: "include"
             })
-            // if(res.ok) {
-            //     e.target.reset();
-            //     Navigate('/icebox');
-            // } else {
-            // // console.log(newMeal)
-            // console.log('error response')
-            // }
         } catch (error) {
                 console.log(error);
         }
         finally {
-            console.log('finally')
             e.target.reset();
             Navigate('/icebox');
             }
@@ -76,9 +68,9 @@ function NewMeal () {
                 <label>Date cooked:</label>
                 <input type="date" placeholder="What date was this meal cooked?" name="date" required onChange={onChange} />
                 <br />
-                <button>Enter into Icebox!</button>
+                <button class="btn btn-success" >Enter into Icebox!</button>
             </form>
-            <Link to="/icebox"><button>Back to Icebox</button></Link>
+            <Link to="/icebox"><button class="btn btn-primary">Back to Icebox</button></Link>
         </>
     )
 }

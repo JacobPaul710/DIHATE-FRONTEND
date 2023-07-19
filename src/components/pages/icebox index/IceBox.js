@@ -78,23 +78,28 @@ function Icebox ( ) {
 
     return(
         <div className="container">
-            <div><h1>Welcome to your Icebox, {username}!</h1>
-           <Link to="/logout" ><button >Log Out</button></Link></div>
+            <div><h1>Welcome to your Icebox, {username}!</h1></div>
+           <div><Link to="/logout" ><button class="btn btn-secondary" >Log Out</button></Link></div>
+           <div>
+                <Link to="/newmeal"><button class="btn btn-success">Enter a new meal here!</button></Link>
+            </div>
 
             {currentPost.map((post) => {
                 let formatted = moment(post.date).format("MM/DD/YYYY")
                 return (
-                            <div key={post._id}>
-                                <h3>Meal: {post.mealName}</h3>
+                            <div key={post._id} className="col-md-6 card">
+                                <div className="card-body">
+                                <h5 className="card-title">Meal: {post.mealName}</h5>
                                 <br />
-                                <h3>Servings left: {post.servings}</h3>
+                                <p className="card-text">Servings left: {post.servings}</p>
                                 <br />
-                                <h3>Date cooked: {formatted}</h3>
+                                <p className="card-text">Date cooked: {formatted}</p>
                                 <button onClick={addServing}>+</button>
                                 <button onClick={subServing}>-</button>
                                 <div>
-                                    <Link to="/editmeal"><button>Edit</button></Link>
-                                    <Link to="/deletemeal"><button>Delete</button></Link>
+                                    <Link to="/editmeal"><button class="btn btn-info">Edit</button></Link>
+                                    <Link to={`/confirm/${post.mealName}/${post._id}`}><button class="btn btn-danger">Delete</button></Link>
+                                </div>
                                 </div>
                             </div>
                             
@@ -103,9 +108,6 @@ function Icebox ( ) {
             })}
             <div className='container mt-5'>
             <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate}/>
-            </div>
-            <div>
-                <Link to="/newmeal"><button>Enter a new meal here!</button></Link>
             </div>
         </div>
     )

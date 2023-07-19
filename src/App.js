@@ -7,8 +7,8 @@ import Registration from './components/pages/registration/Registration';
 import Icebox from './components/pages/icebox index/IceBox';
 import NewMeal from './components/pages/new meal/NewMeal';
 import EditMeal from './components/pages/meal edit/EditMeal';
-import DeleteMeal from './components/pages/delete meal/DeleteMeal';
 import Logout from './components/Logout';
+import ConfirmDelete from './components/pages/delete meal/ConfirmDelete';
 
 function App () {
   return (
@@ -18,7 +18,7 @@ function App () {
       <Route path='/icebox' element={<Icebox />} />
       <Route path='/newmeal' element={<NewMeal />} />
       <Route path='/editmeal' element={<EditMeal />} />
-      <Route path='/deletemeal' element={<DeleteMeal />} />
+      <Route path={`/confirm/:mealName/:id`} element={<ConfirmDelete />} />
       <Route path='/logout' element={<Logout />} />
     </Routes>
   )
