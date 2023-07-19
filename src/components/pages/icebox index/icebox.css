@@ -1,5 +1,15 @@
-.col-6 {
+.welcome {
     display: flex;
-    flex: column;
-    background-color: blue;
+    justify-content: center;
+    ;
+}
+
+.new-meal {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    text-align: center;
 }

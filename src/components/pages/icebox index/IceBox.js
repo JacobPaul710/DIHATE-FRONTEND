@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
-import Pagination from "../../Pagination";
+import Pagination from "../../Pagination/Pagination";
 import moment from 'moment';
 
 
@@ -15,7 +15,7 @@ function Icebox ( ) {
 
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postPerPage] = useState(8);
+    const [postPerPage] = useState(4);
     const [servings, setServings] = useState(0);
     const [username, setUsername] = useState('');
 
@@ -76,41 +76,59 @@ function Icebox ( ) {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
    
 
-    return(
+    return (
         <div className="container">
-            <div><h1>Welcome to your Icebox, {username}!</h1></div>
-           <div><Link to="/logout" ><button class="btn btn-secondary" >Log Out</button></Link></div>
-           <div>
-                <Link to="/newmeal"><button class="btn btn-success">Enter a new meal here!</button></Link>
-            </div>
+          <div className="row">
+          <div className="welcome col-11">
+            <h1>Welcome to your Icebox, {username}!</h1>
+          </div>
+          <div className="col-1"> <Link to="/logout">
+              <button class="btn btn-danger disabled">Log Out</button>
+            </Link> </div>
+          </div>
 
-            {currentPost.map((post) => {
-                let formatted = moment(post.date).format("MM/DD/YYYY")
-                return (
-                            <div key={post._id} className="col-md-6 card">
-                                <div className="card-body">
-                                <h5 className="card-title">Meal: {post.mealName}</h5>
-                                <br />
-                                <p className="card-text">Servings left: {post.servings}</p>
-                                <br />
-                                <p className="card-text">Date cooked: {formatted}</p>
-                                <button onClick={addServing}>+</button>
-                                <button onClick={subServing}>-</button>
-                                <div>
-                                    <Link to="/editmeal"><button class="btn btn-info">Edit</button></Link>
-                                    <Link to={`/confirm/${post.mealName}/${post._id}`}><button class="btn btn-danger">Delete</button></Link>
-                                </div>
-                                </div>
-                            </div>
-                            
-                        
-                )
-            })}
-            <div className='container mt-5'>
-            <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate}/>
+          <div className="row">
+          <div className="col-12 new-meal">
+            <Link to="/newmeal">
+              <button className="btn btn-success">Enter a new meal here!</button>
+            </Link>
             </div>
+          </div>
+      
+          <div className="row">
+            {currentPost.map((post, index) => {
+              let formatted = moment(post.date).format("MM/DD/YYYY");
+              return (
+                <div key={post._id} className="col-md-6">
+                  <div className="card">
+                    <div className="card-body">
+                      <h5 className="card-title">Meal: {post.mealName}</h5>
+                      <br />
+                      <p className="card-text">Servings left: {post.servings}</p>
+                      <br />
+                      <p className="card-text">Date cooked: {formatted}</p>
+                      {/* <button onClick={addServing}>+</button>
+                      <button onClick={subServing}>-</button> */}
+                      <div>
+                        <Link to={`/edit/${post.mealName}/${post._id}`}>
+                          <button className="btn btn-info">Edit</button>
+                        </Link>
+                        <Link to={`/confirm/${post.mealName}/${post._id}`}>
+                          <button className="btn btn-danger">Delete</button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+      
+          <div className="container mt-5">
+            <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate} />
+          </div>
         </div>
-    )
+      );
 }
 
 export default Icebox;

@@ -10,6 +10,8 @@ import EditMeal from './components/pages/meal edit/EditMeal';
 import Logout from './components/Logout';
 import ConfirmDelete from './components/pages/delete meal/ConfirmDelete';
 
+import './themes/bootstrap.min.css'
+
 function App () {
   return (
     <Routes>
@@ -17,8 +19,8 @@ function App () {
       <Route path='/registration' element={<Registration />} />
       <Route path='/icebox' element={<Icebox />} />
       <Route path='/newmeal' element={<NewMeal />} />
-      <Route path='/editmeal' element={<EditMeal />} />
-      <Route path={`/confirm/:mealName/:id`} element={<ConfirmDelete />} />
+      <Route path='/edit/:mealName/:id' element={<EditMeal />} />
+      <Route path='/confirm/:mealName/:id' element={<ConfirmDelete />} />
       <Route path='/logout' element={<Logout />} />
     </Routes>
   )

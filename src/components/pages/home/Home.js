@@ -1,6 +1,8 @@
 import { Link, json, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+import './home.css'
+
 function Home() {
 
         const Navigate = useNavigate();
@@ -66,32 +68,36 @@ function Home() {
         
 
     return(
-        <>
+        <div className="container">
+            <div className="row">
+               <div className="col-12 title"><h1>Do I have anything to eat?</h1></div>
+               </div>
+                    <div className="col-12 intro"><h5>Use this simple site to help you keep track of your frozen meals.</h5>
+                    </div>
+                
             <div>
-                <Link to="/icebox"><h1>Do I have anything to eat?</h1></Link>
-                <h3>Use this simple site to help you keep track of your frozen meals.</h3>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label>Email: </label>
-                    <input type="email" placeholder="Enter Email" name="email" required onChange={handleChange} />
-                    <div className="email error"><p>{Errors.email}</p></div>
-                    <label>Password: </label>
-                    <input type="password" placeholder="Enter Password" name="password" required onChange={handleChange} />
-                    <div className="passsword error">{Errors.password}</div>
+                {/* <fieldset> */}
+                <form className="test" onSubmit={handleSubmit}>
+                    <label className="form-label mt-4"><h5>Email: </h5></label>
+                    <input className="input form-control col-6" type="email" placeholder="Enter Email" name="email" required onChange={handleChange} />
+                    <div className="email error text-danger"><p>{Errors.email}</p></div>
+                    <label className="form-label mt-4"><h5>Password: </h5></label>
+                    <input className="form-control col-6" type="password" placeholder="Enter Password" name="password" required onChange={handleChange} />
+                    <div className="passsword error text-danger"><p>{Errors.password}</p></div>
                     <br />
 
-                    <button class="btn btn-success">Log In</button>
+                    <button className="btn btn-success button">Log In</button>
                 </form>
+                {/* </fieldset> */}
                 
             </div>
-            <div>
-                <h2>Don't have an account? Create one here:</h2>
+            <div className="col-12 create">
+                <h5>Don't have an account? Create one here:</h5>
+                <Link to="/registration"><button className="btn btn-primary">Create New Account</button></Link>
             </div>
-            <div>
-                <Link to="/registration"><button class="btn btn-primary">Create New Account</button></Link>
-            </div>
-        </>
+           
+            
+        </div>
     )
 }
 
