@@ -36,9 +36,9 @@ function Icebox ( ) {
             );
             // let mealData = await fetch('https://jsonplaceholder.typicode.com/posts');
             mealData = await mealData.json();
-            console.log(mealData, "mealdata");
+            // console.log(mealData, "mealdata");
             setPosts(mealData);
-            console.log(posts,"posts");
+            // console.log(posts,"posts");
         }
         catch (err) {
             let error = err.message;
