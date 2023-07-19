@@ -19,7 +19,7 @@ function Icebox() {
   const fetchMeals = async () => {
     const token = Cookies.get('jwt');
     try {
-      let mealData = await fetch('http://localhost:4000/icebox', {
+      let mealData = await fetch('https://dihate-backend.onrender.com/icebox', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

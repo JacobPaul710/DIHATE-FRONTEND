@@ -16,7 +16,7 @@ function ConfirmDelete () {
     const { mealName, id } = useParams();
     async function handleDelete () {
         try {
-        await fetch(`http://localhost:4000/delete/${id}`,{
+        await fetch(`https://dihate-backend.onrender.com//delete/${id}`,{
             method: 'DELETE'
         })
     } catch (error) {
