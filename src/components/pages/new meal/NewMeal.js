@@ -33,7 +33,7 @@ function NewMeal() {
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            await fetch('https://dihate-backend.onrender.com/new', {
+            await fetch('http://localhost:4000/new', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

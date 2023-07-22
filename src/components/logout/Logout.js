@@ -7,7 +7,7 @@ function Logout() {
     const handleLogout = async () => {
         try {
             localStorage.removeItem('response');
-            await fetch('https://dihate-backend.onrender.com/logout');
+            await fetch('http://localhost:4000/logout');
             
         }
         catch (err) {

@@ -20,7 +20,7 @@ function Registration() {
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            const res = await fetch('https://dihate-backend.onrender.com/signup', {
+            const res = await fetch('http://localhost:4000/signup', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

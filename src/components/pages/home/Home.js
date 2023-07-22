@@ -34,7 +34,7 @@ function Home() {
             let email = User.email;
             let password = User.password;
             e.preventDefault();
-            const res = await fetch('https://dihate-backend.onrender.com/login', {
+            const res = await fetch('http://localhost:4000/login', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"

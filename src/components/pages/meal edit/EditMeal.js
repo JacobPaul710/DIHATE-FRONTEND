@@ -36,7 +36,7 @@ function EditMeal() {
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            await fetch(`https://dihate-backend.onrender.com/edit/${id}`, {
+            await fetch(`http://localhost:4000/edit/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json"
