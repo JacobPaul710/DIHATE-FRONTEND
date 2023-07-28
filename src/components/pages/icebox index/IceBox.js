@@ -31,8 +31,8 @@ function Icebox() {
       mealData = await mealData.json();
       setPosts(mealData);
     }
-    catch (error) {
-      // let error = err.message;
+    catch (err) {
+      let error = err.message;
       console.log(error)
     }
   }
